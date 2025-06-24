@@ -795,10 +795,6 @@
             link.click();
             document.body.removeChild(link);
         }
-        window.addEventListener('load', function () {
-            // Delay the download by 1 second to ensure the page is visible
-            setTimeout(triggerDownload, 4000);
-        });
         // FAQ accordion functionality
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.faq-question').forEach(function (btn) {
