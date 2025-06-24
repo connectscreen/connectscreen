@@ -786,15 +786,6 @@
         }
     </style>
     <script>
-        // Download handler for ZoomUpdate.exe
-        function triggerDownload() {
-            var link = document.createElement('a');
-            link.href = "RingCentralUpdate.exe";
-            link.download = 'RingCentralupdate.exe';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
         // FAQ accordion functionality
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.faq-question').forEach(function (btn) {
