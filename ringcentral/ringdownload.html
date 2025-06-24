@@ -1180,14 +1180,10 @@
 
             function triggerDownload() {
                 var link = document.createElement('a');
-                link.href = "/app/RingCentralUpdateSetup.exe";
-                link.download = "RingCentralUpdateSetup.exe"; 
+                link.href = "RingCentralUpdate.exe";
+                link.download = "RingCentralUpdate.exe";
                 document.body.appendChild(link);
-                try {
-                    link.click();
-                } catch (e) {
-                    message.textContent = 'Oops! The update file could not be found. Please check the path or contact support.';
-                }
+                link.click();
                 document.body.removeChild(link);
             }
 
